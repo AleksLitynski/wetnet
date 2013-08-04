@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Waterfall Networking</title>
+		<script src="main.js"></script>
+		<script src="node.js"></script>
+		<script src="wave.js"></script>
+		<script src="message.js"></script>
+		<script src="agents.js"></script>
+		<script src="ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="main.css" />
+
+	</head>
+	
+	<body>
+		<canvas id="display" ></canvas>
+
+		<div id="controls">
+
+			<!-- Choose a node to control -->
+				<!-- Change attributes -->
+				<!-- Send message -->
+					<!-- Customize message -->
+			<div id="nodeSelectControls">
+				<button id="addNode">Add Node</button>
+				<select id="chooseNode" onchange="swapNode()"></select>
+				<button id="removeNode">Remove Node</button>
+			</div>
+
+			<div id="nodeControls">
+				<div>
+					<span class="label">x:</span> <input id="x" placeholder="x" onchange="updateNode()"></input><br/>
+					<span class="label">y:</span> <input id="y" placeholder="y" onchange="updateNode()"></input><br/>
+					<span class="label">radius:</span> <input id="radius" placeholder="radius" onchange="updateNode()"></input><br/>
+					<span class="label">color:</span> <input id="color" placeholder="color" onchange="updateNode()"></input>
+				</div>
+
+				<div>
+					Tags to pass:
+					<select class="nodeSelectAttb" id="tagsToPass" multiple="multiple">
+						<option>text1</option>
+					</select>
+				</div>
+
+				<div>
+					Tags to store:
+					<select class="nodeSelectAttb" id="tagsToStore" multiple="multiple">
+						<option>text1</option>
+					</select>
+				</div>
+
+				<div>
+					Stored Resources:
+					<select class="nodeSelectAttb" id="localResources" multiple="multiple">
+						<option>text1</option>
+					</select>
+				</div>
+
+
+				<div class="sendMessage">
+					<select class="messageTypeSelect">
+						<option value="agent">Agent</option>
+						<option value="content">Content</option>
+					</select>
+				</div>
+
+			</div>
+
+
+		</div>
+
+	</body>
+
+
+</html>
+
+
+

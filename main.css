@@ -1,0 +1,22 @@
+#display{
+	background-color:blue;
+	float:left;
+}
+
+#controls{
+	margin-left:1px;
+	border:1px solid black;
+	width:500px;
+	float:left;
+}
+
+.nodeSelectAttb{
+	width:100%;
+}
+
+
+.label 
+{
+    display: inline-block;
+    width: 50px;
+}
