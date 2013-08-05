@@ -16,59 +16,68 @@
 	<body>
 		<canvas id="display" ></canvas>
 
-		<div id="controls">
 
-			<!-- Choose a node to control -->
-				<!-- Change attributes -->
-				<!-- Send message -->
-					<!-- Customize message -->
-			<div id="nodeSelectControls">
-				<button id="addNode">Add Node</button>
-				<select id="chooseNode" onchange="swapNode()"></select>
-				<button id="removeNode">Remove Node</button>
-			</div>
+		<div id="generalControls" class="controls">
+			<button id="addNode" onclick="addNode()">Add Node</button>
+			<button id="removeNode" onclick="removeNode()">Remove Selected Node</button>
+			<input id="speed"></input>
 
-			<div id="nodeControls">
-				<div>
-					<span class="label">x:</span> <input id="x" placeholder="x" onchange="updateNode()"></input><br/>
-					<span class="label">y:</span> <input id="y" placeholder="y" onchange="updateNode()"></input><br/>
-					<span class="label">radius:</span> <input id="radius" placeholder="radius" onchange="updateNode()"></input><br/>
-					<span class="label">color:</span> <input id="color" placeholder="color" onchange="updateNode()"></input>
-				</div>
-
-				<div>
-					Tags to pass:
-					<select class="nodeSelectAttb" id="tagsToPass" multiple="multiple">
-						<option>text1</option>
-					</select>
-				</div>
-
-				<div>
-					Tags to store:
-					<select class="nodeSelectAttb" id="tagsToStore" multiple="multiple">
-						<option>text1</option>
-					</select>
-				</div>
-
-				<div>
-					Stored Resources:
-					<select class="nodeSelectAttb" id="localResources" multiple="multiple">
-						<option>text1</option>
-					</select>
-				</div>
-
-
-				<div class="sendMessage">
-					<select class="messageTypeSelect">
-						<option value="agent">Agent</option>
-						<option value="content">Content</option>
-					</select>
-				</div>
-
-			</div>
-
+			<table>
+			    <thead>
+			    	<th>Number</th><th>X</th><th>Y</th><th>Radius</th>
+			    </thead>
+				    <tbody id="nodesList">
+			    	</tbody>
+			</table>
 
 		</div>
+
+
+
+
+
+
+		<div id="nodeControls" class="controls">
+			<div>
+				<span class="label">number:</span> <input id="number" onchange="updateNode()" disabled="disabled" value="0"></input><br/>
+				<span class="label">x:</span> <input id="x" placeholder="x" onchange="updateNode()"></input><br/>
+				<span class="label">y:</span> <input id="y" placeholder="y" onchange="updateNode()"></input><br/>
+				<span class="label">radius:</span> <input id="radius" placeholder="radius" onchange="updateNode()"></input><br/>
+				<span class="label">color:</span> <input id="color" placeholder="color" onchange="updateNode()"></input>
+			</div>
+
+			<div class="tags">
+				Tags to pass:
+				<select class="nodeSelectAttb" id="tagsToPass" multiple="multiple">
+					<option>text1</option>
+				</select>
+			</div>
+
+			<div class="tags">
+				Tags to store:
+				<select class="nodeSelectAttb" id="tagsToStore" multiple="multiple">
+					<option>text1</option>
+				</select>
+			</div>
+
+			<div>
+				Stored Resources:
+				<select class="nodeSelectAttb" id="localResources" multiple="multiple">
+					<option>text1</option>
+				</select>
+			</div>
+
+
+			<div class="sendMessage">
+				Send Message:
+				<select class="messageTypeSelect">
+					<option value="agent">Agent</option>
+					<option value="content">Content</option>
+				</select>
+			</div>
+
+		</div>
+
 
 	</body>
 

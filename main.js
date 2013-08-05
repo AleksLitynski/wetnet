@@ -4,8 +4,8 @@ net.waves = [];
 
 window.onload = function() {
 	var canvas=document.getElementById('display');
-	canvas.width = 1000; 
-	canvas.height = screen.height - screen.height/8;
+	canvas.width = window.innerWidth; 
+	canvas.height = window.innerHeight/2;
 	net.ctx=canvas.getContext('2d');
 	net.ctx.fillStyle='#FF0000';
 	net.ctx.width = canvas.width;
@@ -25,7 +25,7 @@ window.onload = function() {
 }
 
 function setup(){
-	for(var x = 0; x < 250; x++){
+	for(var x = 0; x < 750; x++){
 		net.nodes[x] = new net.Node(Math.random() * net.ctx.width, Math.random() * net.ctx.height, 50, "rgba(220,223,0, 0.5);");
 	}
 	//net.nodes[0] = new net.Node(50, 60, 50, "rgba(220,223,0, 0.5);");
@@ -46,7 +46,8 @@ function update(){
 	for(wave in net.waves){
 		net.waves[wave].update();
 	}
-	swapNode();
+
+	updateUI();
 }
 
 function draw(){
