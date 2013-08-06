@@ -1,5 +1,6 @@
 net.ui = {};
 
+
 net.ui.refillNodes = function(){
 	var sel = document.querySelector("#nodesList");
 	sel.innerHTML = "";
@@ -13,6 +14,7 @@ net.ui.refillNodes = function(){
 
 function setupUI(){
 	net.ui.refillNodes();
+    document.querySelector("#speed").value = net.speed;
 }
 
 net.ui.prevSel = 0;
@@ -21,9 +23,12 @@ function selectNode(nodeText){
 
 	setNode(net.nodes[nodeNumber]);
 
-	nodeText.parentNode.children[net.ui.prevSel].style.backgroundColor = "lightgrey";
-	nodeText.style.backgroundColor = "grey";
+	nodeText.parentNode.children[net.ui.prevSel].style.backgroundColor = "rgba(220,223,255, 0.5)";
+	nodeText.style.backgroundColor = "rgba(255,144,45, 0.5)";
 	net.ui.prevSel = nodeNumber;
+    
+    nodeText.scrollIntoView();
+    
 }
 function setNode(node){
 	var sel = document.querySelector("#nodesList");
@@ -34,9 +39,29 @@ function setNode(node){
 	document.querySelector("#radius").value = node.radius;
 	document.querySelector("#color").value = node.color;
 
-	/*this.tagsToPass 	= [];
-	this.tagsToStore 	= [];
-	this.localResources	= [];*/
+	/*this.localResources = []*/
+    
+    var tagOptions = "";
+    for(tag in node.tagsToPass){node.tagsToPass[tag];
+        tagOptions += "<option>" + tag + "</option>";
+    }
+    this.tagsToPass.innerHTML = tagOptions;
+    
+    var tagOptions = "";
+    for(tag in node.tagsToStore){node.tagsToStore[tag];
+        tagOptions += "<option>" + tag + "</option>";
+    }
+    this.tagsToStore.innerHTML = tagOptions;
+    
+    var tagOptions = "";
+    for(resource in node.localResources){node.localResources[resource];
+        tagOptions += "<option>" + resource.tags, resource.text + "</option>";
+    }
+    this.localResources.innerHTML = tagOptions;
+    
+    net.nodes[net.ui.prevSel].color = "rgba(220,223,255, 0.5)";
+    node.color = "rgba(0, 0, 30, 0.6)";
+    console.log(node.color);
 
 }
 
@@ -57,10 +82,39 @@ function updateUI(){
 	
 }
 
+net.ui.isPlaying = true;
+function togglePlay(node){
+    net.ui.isPlaying = !net.ui.isPlaying;
+    if(net.ui.isPlaying){
+        setSpeed(document.querySelector("#speed").value);
+        node.innerHTML = "| |";
+    }
+    else{
+        net.speed = 0;
+        node.innerHTML = ">";
+    }
+}
+function setSpeed(newValue){
+    net.ui.isPlaying = true; 
+    document.querySelector("#pausePlay").innerHTML = "| |";
+    if(parseFloat(newValue) != NaN)
+    {
+            net.speed = parseFloat(newValue);
+    }
+    else
+    {
+        document.querySelector("#speed").value = net.speed;
+        setSpeed(net.speed, restore);
+    }
+    
+    
+    
+}
+
 
 function addNode(){
 
-	net.nodes[net.nodes.length] = new net.Node(Math.random() * net.ctx.width, Math.random() * net.ctx.height, 50, "rgba(220,223,0, 0.5);");
+	net.nodes[net.nodes.length] = new net.Node(Math.random() * net.ctx.width, Math.random() * net.ctx.height, 50, "rgba(220,223,255, 0.5)");
 
 	var node = net.nodes[parseInt(document.querySelector("#number").value)];
 

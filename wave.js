@@ -1,9 +1,8 @@
-net.Wave = function(x,y,maxRadius,rate, node, message){
+net.Wave = function(x,y,maxRadius, node, message){
 		this.x = x;
 		this.y = y;
 		this.radius = 0;
 		this.maxRadius = maxRadius;
-		this.rate=rate;
 		this.color = message.color;
 		this.message = message;
 		this.parentNode = node;
@@ -23,7 +22,7 @@ net.Wave = function(x,y,maxRadius,rate, node, message){
 			net.ctx.stroke();
 		};
 		this.update = function(){
-			this.radius += this.rate;
+			this.radius += net.speed;
 
 			for(node in net.nodes){ node = net.nodes[node];
 				if(node != this.parentNode && this.alreadyRecieved.indexOf(node) == -1){
@@ -36,7 +35,7 @@ net.Wave = function(x,y,maxRadius,rate, node, message){
 				}
 			}
 
-			if(this.radius > this.maxRadius){
+			if(this.radius > this.maxRadius || this.radius <= 0){
 				net.waves.splice(net.waves.indexOf(this), 1);
 			}
 		};
@@ -52,4 +51,8 @@ net.Wave = function(x,y,maxRadius,rate, node, message){
 
 
 };
-
+function lineDistance( p1, p2 ){
+				var x = Math.pow(p2.x - p1.x, 2);
+				var y = Math.pow(p2.y - p1.y, 2);
+				return Math.sqrt(x + y);
+			}

@@ -2,7 +2,7 @@
 }
 
 .controls{
-	border:1px solid black;
+	border-left:1px solid black;
 	width:500px;
 	float:left;
 }
@@ -31,7 +31,7 @@
 
 
 tbody {
-    background-color: lightgrey;
+    background-color: rgba(220,223,255, 0.5);
     height: 200px;
     overflow-y: scroll;
 }
@@ -45,5 +45,9 @@ td, th{
 	overflow:hidden;
     border-left:1px solid black;
     border-bottom:1px solid black;
+    border-bottom-left-radius:10px;
+}
 
+#speed{
+    width:25px;
 }

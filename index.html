@@ -18,9 +18,11 @@
 
 
 		<div id="generalControls" class="controls">
+            
+			<input id="speed" value="4" onchange="setSpeed(this.value)"></input>
+            <button id="pausePlay" onclick="togglePlay(this)">| |</button>
 			<button id="addNode" onclick="addNode()">Add Node</button>
 			<button id="removeNode" onclick="removeNode()">Remove Selected Node</button>
-			<input id="speed"></input>
 
 			<table>
 			    <thead>
@@ -56,14 +58,12 @@
 			<div class="tags">
 				Tags to store:
 				<select class="nodeSelectAttb" id="tagsToStore" multiple="multiple">
-					<option>text1</option>
 				</select>
 			</div>
 
 			<div>
 				Stored Resources:
 				<select class="nodeSelectAttb" id="localResources" multiple="multiple">
-					<option>text1</option>
 				</select>
 			</div>
 

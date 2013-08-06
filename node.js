@@ -77,7 +77,7 @@ net.Node = function(x,y,radius,color){
 
 				
 				this.broadcastContent = function(tags, text){
-					net.waves.push(new net.Wave(this.x, this.y, this.radius, 3, this, new net.Message("rgba(255,0,45, 0.5);", "content", {tags:tags, text:text})));
+					net.waves.push(new net.Wave(this.x, this.y, this.radius, this, new net.Message("rgba(255,144,45, 0.5);", "content", {tags:tags, text:text})));
 				}
 
 
@@ -89,6 +89,6 @@ net.Node = function(x,y,radius,color){
 						if(agent.sources.length > agent.maxSources){
 							agent.sources.splice(agent.sources.length-1, 1);
 						}
-						net.waves.push(new net.Wave(this.x, this.y, this.radius, net.speed, this, new net.Message("rgba(255,0,45, 0.5);", "agent", agent)));
+						net.waves.push(new net.Wave(this.x, this.y, this.radius, this, new net.Message("rgba(255,144,45, 0.5);", "agent", agent)));
 				}
 }
