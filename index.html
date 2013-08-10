@@ -9,6 +9,7 @@
 		<script src="message.js"></script>
 		<script src="agents.js"></script>
 		<script src="ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="reset.css" />
 		<link rel="stylesheet" type="text/css" href="main.css" />
 
 	</head>
@@ -17,67 +18,69 @@
 		<canvas id="display" ></canvas>
 
 
-		<div id="generalControls" class="controls">
-            
-			<input id="speed" value="4" onchange="setSpeed(this.value)"></input>
-            <button id="pausePlay" onclick="togglePlay(this)">| |</button>
-			<button id="addNode" onclick="addNode()">Add Node</button>
-			<button id="removeNode" onclick="removeNode()">Remove Selected Node</button>
+		<div id="controlPanel">
+			<div id="generalControls" class="controls">
+	            
+				<input id="speed" value="4" onchange="setSpeed(this.value)"></input>
+	            <button id="pausePlay" onclick="togglePlay(this)">| |</button>
+				<button id="addNode" onclick="addNode()">Add Node</button>
+				<button id="removeNode" onclick="removeNode()">Remove Selected Node</button>
 
-			<table>
-			    <thead>
-			    	<th>Number</th><th>X</th><th>Y</th><th>Radius</th>
-			    </thead>
-				    <tbody id="nodesList">
-			    	</tbody>
-			</table>
+				<table>
+				    <thead>
+				    	<th>Number</th><th>X</th><th>Y</th><th>Radius</th>
+				    </thead>
+					    <tbody id="nodesList">
+				    	</tbody>
+				</table>
 
+			</div>
+
+
+
+
+
+
+			<div id="nodeControls" class="controls">
+				<button id="refreshNode" onclick="refreshCurrent()">Refresh</button>
+				<div>
+					<span class="label">number:</span> <input id="number" onchange="updateNode()" disabled="disabled" value="0"></input><br/>
+					<span class="label">x:</span> <input id="x" placeholder="x" onchange="updateNode()"></input><br/>
+					<span class="label">y:</span> <input id="y" placeholder="y" onchange="updateNode()"></input><br/>
+					<span class="label">radius:</span> <input id="radius" placeholder="radius" onchange="updateNode()"></input><br/>
+					<span class="label">color:</span> <input id="color" placeholder="color" onchange="updateNode()"></input>
+				</div>
+
+				<div class="tags">
+					Tags to pass: <input id="addPassTag" placeholder="tag name" style="width:50px" onchange="addTagToPass()"></input><button onchange="addTagToPass()">Add</button>
+					<div class="nodeSelectAttb" id="tagsToPass">
+					</div>
+				</div>
+
+				<div class="tags">
+					Tags to store: <input id="addStoreTag" placeholder="tag name" style="width:50px" onchange="addTagToStore()"></input><button onchange="addTagToStore()">Add</button>
+					<div class="nodeSelectAttb" id="tagsToStore">
+					</div>
+				</div>
+
+				<div>
+					Stored Resources:
+					<div class="nodeSelectAttb" id="localResources">
+					</div>
+				</div>
+			</div>
+
+			<did id="sendMessage" class"controls">
+				<div class="sendMessage">
+					Send Message:
+					<select class="messageTypeSelect">
+						<option value="agent">Agent</option>
+						<option value="content">Content</option>
+					</select>
+				</div>
+
+			</div>
 		</div>
-
-
-
-
-
-
-		<div id="nodeControls" class="controls">
-			<div>
-				<span class="label">number:</span> <input id="number" onchange="updateNode()" disabled="disabled" value="0"></input><br/>
-				<span class="label">x:</span> <input id="x" placeholder="x" onchange="updateNode()"></input><br/>
-				<span class="label">y:</span> <input id="y" placeholder="y" onchange="updateNode()"></input><br/>
-				<span class="label">radius:</span> <input id="radius" placeholder="radius" onchange="updateNode()"></input><br/>
-				<span class="label">color:</span> <input id="color" placeholder="color" onchange="updateNode()"></input>
-			</div>
-
-			<div class="tags">
-				Tags to pass:
-				<select class="nodeSelectAttb" id="tagsToPass" multiple="multiple">
-					<option>text1</option>
-				</select>
-			</div>
-
-			<div class="tags">
-				Tags to store:
-				<select class="nodeSelectAttb" id="tagsToStore" multiple="multiple">
-				</select>
-			</div>
-
-			<div>
-				Stored Resources:
-				<select class="nodeSelectAttb" id="localResources" multiple="multiple">
-				</select>
-			</div>
-
-
-			<div class="sendMessage">
-				Send Message:
-				<select class="messageTypeSelect">
-					<option value="agent">Agent</option>
-					<option value="content">Content</option>
-				</select>
-			</div>
-
-		</div>
-
 
 	</body>
 

@@ -9,13 +9,17 @@ net.mouse.y = 0;
 window.onload = function() {
 	var canvas=document.getElementById('display');
 	canvas.width = window.innerWidth; 
-	canvas.height = window.innerHeight/2;
+	canvas.height = window.innerHeight;
 	net.ctx=canvas.getContext('2d');
 	net.ctx.fillStyle='#FF0000';
 	net.ctx.width = canvas.width;
 	net.ctx.height = canvas.height;
 
 	var mainloop = function() {
+		canvas.width = window.innerWidth; 
+		canvas.height = window.innerHeight;
+		net.ctx.width = canvas.width;
+		net.ctx.height = canvas.height;
 		net.ctx.clearRect ( 0 , 0 , net.ctx.width , net.ctx.height );
 		net.ctx.strokeRect(0,0,net.ctx.width,net.ctx.height);
 		update();
@@ -32,7 +36,8 @@ function setup(){
 	for(var x = 0; x < 750; x++){
 		net.nodes[x] = new net.Node(Math.random() * net.ctx.width, Math.random() * net.ctx.height, 50, "rgba(220,223,255, 0.5);");
 	}
-	//net.nodes[0] = new net.Node(50, 60, 50, "rgba(220,223,0, 0.5);");
+	net.nodes[0] = new net.Node(50, 60, 50, "rgba(220,223,0, 0.5);");
+	net.nodes[0].tagsToStore.push("aaa");
 	//net.nodes[1] = new net.Node(50, 50, 50, "rgba(220,223,0, 0.5);");
 
 	net.nodes[0].broadcast({tag:"aaa", assess:  net.agents.always, sources:[], maxSources:1000});
@@ -57,10 +62,11 @@ function setup(){
         for(var node = net.nodes.length-1; node >= 0; node--){nodeVal = net.nodes[node];
             if(lineDistance({x:nodeVal.x, y:nodeVal.y}, {x:net.mouse.x, y:net.mouse.y}) < nodeVal.radius){
                 selectNode(document.querySelector("#nodesList").children[node]);
+    			document.querySelector("#nodesList").children[node].scrollIntoView();
+    			document.querySelector("#controlPanel").offsetTop = 0;
                 break;
             }
         }
-        console.log(event);
     }, false);
 
     
@@ -68,11 +74,6 @@ function setup(){
     
     
 }
-
-
-
-
-
 
 
 function update(){

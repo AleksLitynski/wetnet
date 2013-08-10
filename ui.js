@@ -27,9 +27,14 @@ function selectNode(nodeText){
 	nodeText.style.backgroundColor = "rgba(255,144,45, 0.5)";
 	net.ui.prevSel = nodeNumber;
     
-    nodeText.scrollIntoView();
+
     
 }
+
+function refreshCurrent() {
+    selectNode(document.querySelector("#nodesList").children[net.ui.prevSel]);
+}
+
 function setNode(node){
 	var sel = document.querySelector("#nodesList");
 
@@ -41,28 +46,55 @@ function setNode(node){
 
 	/*this.localResources = []*/
     
-    var tagOptions = "";
-    for(tag in node.tagsToPass){node.tagsToPass[tag];
-        tagOptions += "<option>" + tag + "</option>";
+    var tagOptions = ""; var indexOfTag = 0;
+    for(tag in node.tagsToPass){
+        tagOptions += "<div class='selectRow'><span class='label'>" + tag + "</span><input style='width:50px'onchange='updatePassValue( \" " + tag + " \" , this)' value='"+node.tagsToPass[tag]+"'></input><button class='closeBtn' onclick='removeTagToPass( \" " +tag+ " \" )' style='float:right'>X</button></div>";
+        indexOfTag += 1;
     }
     this.tagsToPass.innerHTML = tagOptions;
     
     var tagOptions = "";
-    for(tag in node.tagsToStore){node.tagsToStore[tag];
-        tagOptions += "<option>" + tag + "</option>";
+    for(tag in node.tagsToStore){
+        tagOptions += "<div class='selectRow'>" + node.tagsToStore[tag] + "<button class='closeBtn' onclick='removeTagToStore( \" " +tag+ " \" )' style='float:right'>X</button></div>";
     }
     this.tagsToStore.innerHTML = tagOptions;
     
     var tagOptions = "";
     for(resource in node.localResources){node.localResources[resource];
-        tagOptions += "<option>" + resource.tags, resource.text + "</option>";
+        tagOptions += "<div class='selectRow'>" + resource.tags, resource.text + "</div>";
     }
     this.localResources.innerHTML = tagOptions;
     
     net.nodes[net.ui.prevSel].color = "rgba(220,223,255, 0.5)";
     node.color = "rgba(0, 0, 30, 0.6)";
-    console.log(node.color);
 
+}
+
+function updatePassValue(value, self){
+    
+    net.nodes[net.ui.prevSel].setPassTagValue(value, self.value);
+    refreshCurrent();
+}
+
+function removeTagToStore(toRemove){
+    net.nodes[net.ui.prevSel].removeStoreTag( toRemove );
+    refreshCurrent();
+}
+function addTagToStore(){
+    net.nodes[net.ui.prevSel].setStoreTagValue(document.querySelector("#addStoreTag").value, 1);
+    refreshCurrent();
+}
+
+function removeTagToPass(toRemove){
+
+    net.nodes[net.ui.prevSel].removePassTag( toRemove );
+
+    refreshCurrent();
+}
+
+function addTagToPass(){
+    net.nodes[net.ui.prevSel].setPassTagValue(document.querySelector("#addPassTag").value, 1);
+    refreshCurrent();
 }
 
 function updateNode(){

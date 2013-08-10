@@ -2,18 +2,52 @@
 }
 
 .controls{
-	border-left:1px solid black;
+	border-left:3px solid black;
 	width:500px;
+    height:100%;
 	float:left;
+    padding-left:10px;
+
 }
 
+#controlPanel{
+    position:absolute;
+    width:100vw;
+    bottom:0px;
+    height:50px;
+    background-color: rgba(255,255,255,0.6);
+
+    -webkit-transition:height 0.1s;
+
+    overflow-y:hidden; word-wrap:break-word; overflow-x:scroll;
+    border-top: 3px solid black;
+
+}
+#controlPanel:hover{
+    height:500px;
+
+}
 .nodeSelectAttb{
-	width:100%;
+	width:94%;
+    padding:2%;
+    border:1px solid black;
+    height:135px;
+    overflow-y:scroll;
 }
 
+.selectRow{
+    border-bottom:1px solid black;
+    min-height:25px;
+}
 
-.label 
-{
+.closeBtn{
+    padding:0px;
+    margin:0px;
+    height:25px;
+    width:25px;
+}
+
+.label {
     display: inline-block;
     width: 50px;
 }
@@ -45,9 +79,18 @@ td, th{
 	overflow:hidden;
     border-left:1px solid black;
     border-bottom:1px solid black;
-    border-bottom-left-radius:10px;
+
+    padding:3px;
 }
 
 #speed{
     width:25px;
+}
+
+body{
+    overflow:hidden;
+}
+
+#refreshNode{
+    float:right
 }
