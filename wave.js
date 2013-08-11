@@ -24,11 +24,12 @@ net.Wave = function(x,y,maxRadius, node, message){
 		this.update = function(){
 			this.radius += net.speed;
 
-			for(node in net.nodes){ node = net.nodes[node];
+			for(node in this.parentNode.localNodes){ node = this.parentNode.localNodes[node];
+
+				node.color = "rgba(255, 255, 255, 0.5);"
+
 				if(node != this.parentNode && this.alreadyRecieved.indexOf(node) == -1){
 					if(interceptsNodes(this, node)){
-
-
 							node.messages.push(this.message);
 							this.alreadyRecieved.push(node);
 					}

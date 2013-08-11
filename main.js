@@ -33,14 +33,14 @@ window.onload = function() {
 }
 
 function setup(){
-	for(var x = 0; x < 750; x++){
+	for(var x = 0; x < 2000; x++){
 		net.nodes[x] = new net.Node(Math.random() * net.ctx.width, Math.random() * net.ctx.height, 50, "rgba(220,223,255, 0.5);");
 	}
 	net.nodes[0] = new net.Node(50, 60, 50, "rgba(220,223,0, 0.5);");
 	net.nodes[0].tagsToStore.push("aaa");
 	//net.nodes[1] = new net.Node(50, 50, 50, "rgba(220,223,0, 0.5);");
 
-	net.nodes[0].broadcast({tag:"aaa", assess:  net.agents.always, sources:[], maxSources:1000});
+	net.nodes[0].broadcast({tag:"aaa", assess:  net.agents.always, sources:[], maxSources:10000});
 
 
 	for(node in net.nodes){

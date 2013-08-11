@@ -31,7 +31,7 @@
 	width:94%;
     padding:2%;
     border:1px solid black;
-    height:135px;
+    height:130px;
     overflow-y:scroll;
 }
 
@@ -59,7 +59,6 @@
 }
 
 .sendMessage{
-	border:1px solid black;
 }
 
 
@@ -93,4 +92,8 @@ body{
 
 #refreshNode{
     float:right
+}
+
+#nodesList {
+    height:430px;
 }

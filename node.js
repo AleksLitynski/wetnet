@@ -6,6 +6,8 @@ net.Node = function(x,y,radius,color){
 				this.color 			= color;
 				this.messages 		= [];
 
+				this.localNodes		= [];
+
 				this.tagsToPass 	= [];
 				this.tagsToStore 	= [];
 				this.localResources	= [];
@@ -14,6 +16,7 @@ net.Node = function(x,y,radius,color){
 					if(Math.random() < 0.01){
 						//this.broadcast({tag:"aaa", assess:  net.agents.always, sources:[], maxSources:10});
 					}
+					this.move(this.x, this.y);
 				}
 
 				this.draw = function(){
@@ -31,6 +34,43 @@ net.Node = function(x,y,radius,color){
 				};
 
 				
+				this.move = function(x, y){
+					this.x = x;
+					this.y = y;
+
+					for(localNode in this.localNodes){
+						try{
+							this.localNodes[localNode].localNode.splice(this, 1);
+						}catch(err){}
+					}
+
+					this.localNodes = [];
+
+					function interceptsNodes(self, node){
+						function lineDistance( p1, p2 ){
+							var x = Math.pow(p2.x - p1.x, 2);
+							var y = Math.pow(p2.y - p1.y, 2);
+							return Math.sqrt(x + y);
+						}
+						return lineDistance({x:self.x, y:self.y}, {x:node.x, y:node.y}) < self.radius;
+					}
+
+					for(node in net.nodes){
+						if(interceptsNodes(this, net.nodes[node])){
+							this.localNodes.push(net.nodes[node]);
+						}
+					}
+
+					for(node in this.localNodes){
+						this.localNodes[node].localNodes.push(this);
+					}
+					//NOTE: waves compare's to parent's targets
+					//remove self from all local's localNodes
+					//Add self to all new localNodes
+
+
+				};
+
 
 				this.update = function(){
 					
@@ -49,13 +89,17 @@ net.Node = function(x,y,radius,color){
 						}
 						else{
 							var content = this.messages[i].content;
-							for(tag in tags){tag = tags[tag].trim();
+							var tags = content.tags.split(" ");
+							for(tag in tags){
+								console.log(tag);
+								console.log(tags[tag]);
 								if(this.tagsToStore.indexOf(tag) > -1){
 									this.localResources.push(content);
 								}
 								if(this.tagsToPass.indexOf(tag) > -1){
 									this.broadcastContent(content.tags, content.text);
 								}
+
 							}
 							//store?
 							//retransmit?
@@ -65,7 +109,7 @@ net.Node = function(x,y,radius,color){
 						this.messages.splice(i, 1); i--;
 					}
 
-
+					this.color = "rgba(0, 200, 0, 0.5);";
 
 					//transmit more resources
 

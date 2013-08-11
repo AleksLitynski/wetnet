@@ -26,6 +26,12 @@ function selectNode(nodeText){
 	nodeText.parentNode.children[net.ui.prevSel].style.backgroundColor = "rgba(220,223,255, 0.5)";
 	nodeText.style.backgroundColor = "rgba(255,144,45, 0.5)";
 	net.ui.prevSel = nodeNumber;
+
+    var agentList = "";
+    for(agent in net.agents){
+        agentList += "<option>" + agent + "</option>"
+    }
+    document.querySelector("#agentType").innerHTML = agentList;
     
 
     
@@ -60,8 +66,9 @@ function setNode(node){
     this.tagsToStore.innerHTML = tagOptions;
     
     var tagOptions = "";
-    for(resource in node.localResources){node.localResources[resource];
-        tagOptions += "<div class='selectRow'>" + resource.tags, resource.text + "</div>";
+    for(resource in node.localResources){
+        tagOptions += "<div class='selectRow'>" + node.localResources[resource].tags + " | " + node.localResources[resource].text 
+        + "<button class='closeBtn' onclick='removeResourceFromNode( \" " +resource+ " \" )' style='float:right'>X</button></div>";
     }
     this.localResources.innerHTML = tagOptions;
     
@@ -97,6 +104,18 @@ function addTagToPass(){
     refreshCurrent();
 }
 
+function sendCustomMessage(){
+
+
+    if(document.querySelector("#messageTypeSelect").value == "agent"){
+        net.nodes[net.ui.prevSel].broadcast({tag: document.querySelector("#tags").value, assess: net.agents[document.querySelector("#agentType").value], sources:[], maxSources:1000});
+    }
+    if(document.querySelector("#messageTypeSelect").value == "content"){
+        net.nodes[net.ui.prevSel].broadcastContent(document.querySelector("#tags").value, document.querySelector("#text").value);
+    }
+
+}
+
 function updateNode(){
 
 	var node = net.nodes[parseInt(document.querySelector("#number").value)];
@@ -109,6 +128,20 @@ function updateNode(){
 	document.querySelector("#nodesList").children[net.ui.prevSel].innerHTML = "<tr onclick='selectNode(this);'><td>"+net.ui.prevSel+"</td><td>"+Math.round(node.x)+"</td><td>"+Math.round(node.y)+"</td><td>"+Math.round(node.radius)+"</td></tr>";
 }
 
+
+function addResourceToNode(){
+    console.log(net.nodes[net.ui.prevSel].localResources);
+    net.nodes[net.ui.prevSel].localResources.push({tags: document.querySelector("#resourceTags").value, text: document.querySelector("#resourceText").value});
+
+    refreshCurrent();
+}
+
+function removeResourceFromNode(toRemove){
+    console.log(toRemove);
+    net.nodes[net.ui.prevSel].localResources.splice(toRemove, 1);
+    
+    refreshCurrent();
+}
 
 function updateUI(){
 	

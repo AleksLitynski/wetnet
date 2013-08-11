@@ -26,7 +26,7 @@
 				<button id="addNode" onclick="addNode()">Add Node</button>
 				<button id="removeNode" onclick="removeNode()">Remove Selected Node</button>
 
-				<table>
+				<table id="nodeTable">
 				    <thead>
 				    	<th>Number</th><th>X</th><th>Y</th><th>Radius</th>
 				    </thead>
@@ -64,7 +64,10 @@
 				</div>
 
 				<div>
-					Stored Resources:
+					Stored Resources: 
+					<input id="resourceTags" placeholder="Tag(s)" style="width:50px"></input>
+					<input id="resourceText" placeholder="Text" style="width:200px"></input>
+					<button onclick="addResourceToNode()">Add</button>
 					<div class="nodeSelectAttb" id="localResources">
 					</div>
 				</div>
@@ -73,10 +76,19 @@
 			<did id="sendMessage" class"controls">
 				<div class="sendMessage">
 					Send Message:
-					<select class="messageTypeSelect">
-						<option value="agent">Agent</option>
-						<option value="content">Content</option>
-					</select>
+					<div>
+						<select id= "messageTypeSelect" class="messageTypeSelect">
+							<option value="agent">Agent</option>
+							<option value="content">Content</option>
+						</select></br>
+
+						<select id="agentType"></select></br>
+						<input id="tags" placeholder="tag(s)"></input></br>
+						<input id="text" placeholder="text"></input></br>
+
+						<button id="sendMessageBtn" onclick="sendCustomMessage()">Send Message</button>
+					</div>
+
 				</div>
 
 			</div>
