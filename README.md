@@ -13,3 +13,6 @@ drag around nodes								<- in nodes?
 load/run different layouts						<- nowhere yet
 transfer docs correctly/send docs correctly 	<- NODE.js line 50
 partition better.
+
+
+Note: http://jsfiddle.net/Zevan/QZejF/5/
