@@ -11,7 +11,7 @@ window.onload = function() {
 	canvas.width = window.innerWidth; 
 	canvas.height = window.innerHeight;
 	net.ctx=canvas.getContext('2d');
-	net.ctx.fillStyle='#FF0000';
+	net.ctx.fillStyle='#aaffaa';
 	net.ctx.width = canvas.width;
 	net.ctx.height = canvas.height;
 
@@ -33,7 +33,7 @@ window.onload = function() {
 }
 
 function setup(){
-	for(var x = 0; x < 2000; x++){
+	for(var x = 0; x < 1500; x++){
 		net.nodes[x] = new net.Node(Math.random() * net.ctx.width, Math.random() * net.ctx.height, 50, "rgba(220,223,255, 0.5);");
 	}
 	net.nodes[0] = new net.Node(50, 60, 50, "rgba(220,223,0, 0.5);");

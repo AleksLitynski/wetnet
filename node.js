@@ -109,7 +109,8 @@ net.Node = function(x,y,radius,color){
 						this.messages.splice(i, 1); i--;
 					}
 
-					this.color = "rgba(0, 200, 0, 0.5);";
+					//this.color = "rgba(0, 200, 0, 0.5);";
+					this.color =  "rgba(220,223,255, 0.5);";
 
 					//transmit more resources
 
